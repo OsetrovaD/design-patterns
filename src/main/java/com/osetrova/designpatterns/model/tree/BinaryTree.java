@@ -1,4 +1,4 @@
-package com.osetrova.designpatterns.model;
+package com.osetrova.designpatterns.model.tree;
 
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ public class BinaryTree <T extends Comparable<T>> {
     private Node<T> root;
 
     @Getter
-    public static class Node<Y extends Comparable<Y>> {
+    public static class Node<Y extends Comparable<Y>> implements com.osetrova.designpatterns.model.tree.Node {
         private Y key;
         private Node<Y> leftChild;
         private Node<Y> rightChild;

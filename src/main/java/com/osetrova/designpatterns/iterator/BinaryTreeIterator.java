@@ -1,6 +1,6 @@
 package com.osetrova.designpatterns.iterator;
 
-import com.osetrova.designpatterns.model.BinaryTree;
+import com.osetrova.designpatterns.model.tree.BinaryTree;
 import com.osetrova.designpatterns.strategy.IterationStrategy;
 import lombok.Setter;
 
@@ -9,7 +9,7 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class BinaryTreeIterator<T extends Comparable<T>> implements Iterator<T> {
+public class BinaryTreeIterator<T extends Comparable<T>> implements Iterator<BinaryTree.Node<T>> {
 
     @Setter
     private IterationStrategy strategy;
@@ -39,7 +39,7 @@ public class BinaryTreeIterator<T extends Comparable<T>> implements Iterator<T> 
     }
 
     @Override
-    public T next() {
+    public BinaryTree.Node<T> next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }

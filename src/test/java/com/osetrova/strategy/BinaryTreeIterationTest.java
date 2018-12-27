@@ -14,19 +14,13 @@ import static org.junit.Assert.assertEquals;
 
 public class BinaryTreeIterationTest {
 
-    private static BinaryTreeIterator<Integer> iterator;
-
-    @BeforeClass
-    public static void initTree() {
-        iterator = new BinaryTreeIterator<>(TestTreeInitUtil.buildIntegerTree(), BFSIterationStrategy.getInstance());
-    }
-
     @Test
     public void checkBFSIteration() {
+        BinaryTreeIterator<Integer> iterator = new BinaryTreeIterator<>(TestTreeInitUtil.buildIntegerTree(), BFSIterationStrategy.getInstance());
         List<Integer> actual = new ArrayList<>();
 
         while (iterator.hasNext()) {
-            actual.add(iterator.next());
+            actual.add(iterator.next().getKey());
         }
 
         List<Integer> expectedValues = new ArrayList<>();
@@ -45,11 +39,11 @@ public class BinaryTreeIterationTest {
 
     @Test
     public void checkDFSPreOrderIteration() {
-        iterator.setStrategy(DFSPreOrderIterationStrategy.getInstance());
+        BinaryTreeIterator<Integer> iterator = new BinaryTreeIterator<>(TestTreeInitUtil.buildIntegerTree(), DFSPreOrderIterationStrategy.getInstance());
         List<Integer> actual = new ArrayList<>();
 
         while (iterator.hasNext()) {
-            actual.add(iterator.next());
+            actual.add(iterator.next().getKey());
         }
 
         List<Integer> expectedValues = new ArrayList<>();

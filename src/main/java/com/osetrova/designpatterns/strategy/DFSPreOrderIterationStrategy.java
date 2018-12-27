@@ -1,6 +1,6 @@
 package com.osetrova.designpatterns.strategy;
 
-import com.osetrova.designpatterns.model.BinaryTree;
+import com.osetrova.designpatterns.model.tree.BinaryTree;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +26,7 @@ public final class DFSPreOrderIterationStrategy implements IterationStrategy {
     }
 
     @Override
-    public <T extends Comparable<T>> T getCurrentValue(Deque<BinaryTree.Node<T>> nodes) {
+    public <T extends Comparable<T>> BinaryTree.Node<T> getCurrentValue(Deque<BinaryTree.Node<T>> nodes) {
         BinaryTree.Node<T> currentNode = nodes.pop();
 
         if (nonNull(currentNode.getRightChild())) {
@@ -37,6 +37,6 @@ public final class DFSPreOrderIterationStrategy implements IterationStrategy {
             nodes.push(currentNode.getLeftChild());
         }
 
-        return currentNode.getKey();
+        return currentNode;
     }
 }
