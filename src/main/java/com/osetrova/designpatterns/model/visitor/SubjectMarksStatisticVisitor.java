@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.Comparator.reverseOrder;
-
 public class SubjectMarksStatisticVisitor implements BinaryTreeVisitor<Student> {
 
     private Map<Student, Map<String, List<Integer>>> allMarks = new HashMap<>();
@@ -33,7 +31,8 @@ public class SubjectMarksStatisticVisitor implements BinaryTreeVisitor<Student> 
                                 .mapToInt(Integer::intValue)
                                 .average()
                                 .orElse(Double.NaN)))
-                .entrySet().stream().sorted(Map.Entry.comparingByValue(reverseOrder()))
+                .entrySet().stream().sorted(Comparator.comparing((Map.Entry<Student, Double> e) -> e.getValue()).reversed()
+                                                    .thenComparing((Map.Entry<Student, Double> e) -> e.getKey()))
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,
@@ -42,13 +41,15 @@ public class SubjectMarksStatisticVisitor implements BinaryTreeVisitor<Student> 
 
     public Map<Student, List<Integer>> getAllMarks(String subject) {
         return allMarks.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         e -> e.getValue().entrySet().stream()
                         .filter(s -> s.getKey().equals(subject))
                         .map(Map.Entry::getValue)
                         .flatMap(Collection::stream)
-                        .collect(Collectors.toList())));
+                        .collect(Collectors.toList()),
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }
 
     public Map<Student, Integer> getMaxMark(String subject) {
