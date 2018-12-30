@@ -1,7 +1,7 @@
 package com.osetrova.designpatterns.model.visitor;
 
 import com.osetrova.designpatterns.model.Student;
-import com.osetrova.designpatterns.model.tree.AcceptVisitor;
+import com.osetrova.designpatterns.model.tree.AcceptVisitorNode;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -16,7 +16,7 @@ public class SubjectMarksStatisticVisitor implements BinaryTreeVisitor<Student> 
     private Map<Student, Map<String, List<Integer>>> allMarks = new HashMap<>();
 
     @Override
-    public void collectStatistic(AcceptVisitor<Student> node) {
+    public void collectStatistic(AcceptVisitorNode<Student> node) {
         allMarks.put(node.getKey(), node.getKey().getSubjectMarks());
     }
 

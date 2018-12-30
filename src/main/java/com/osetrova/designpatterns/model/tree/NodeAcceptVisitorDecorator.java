@@ -1,14 +1,12 @@
 package com.osetrova.designpatterns.model.tree;
 
 import com.osetrova.designpatterns.model.visitor.BinaryTreeVisitor;
+import lombok.AllArgsConstructor;
 
-public class NodeAcceptVisitorDecorator<T extends Comparable<T>> implements AcceptVisitor<T> {
+@AllArgsConstructor
+public class NodeAcceptVisitorDecorator<T extends Comparable<T>> implements AcceptVisitorNode<T> {
 
-    private Node<T> node;
-
-    public NodeAcceptVisitorDecorator(Node<T> node) {
-        this.node = node;
-    }
+    private BinaryTreeNode<T> node;
 
     @Override
     public void accept(BinaryTreeVisitor<T> visitor){

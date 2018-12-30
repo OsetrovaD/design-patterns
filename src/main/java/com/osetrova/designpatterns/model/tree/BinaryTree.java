@@ -7,17 +7,6 @@ public class BinaryTree <T extends Comparable<T>> {
 
     private Node<T> root;
 
-    @Getter
-    public static class Node<Y extends Comparable<Y>> implements com.osetrova.designpatterns.model.tree.Node {
-        private Y key;
-        private Node<Y> leftChild;
-        private Node<Y> rightChild;
-
-        private Node(Y key) {
-            this.key = key;
-        }
-    }
-
     public void add(T key) {
         Node<T> newNode = new Node<>(key);
 
@@ -43,6 +32,17 @@ public class BinaryTree <T extends Comparable<T>> {
                     }
                 }
             }
+        }
+    }
+
+    @Getter
+    public static class Node<Y extends Comparable<Y>> implements BinaryTreeNode {
+        private Y key;
+        private Node<Y> leftChild;
+        private Node<Y> rightChild;
+
+        private Node(Y key) {
+            this.key = key;
         }
     }
 }

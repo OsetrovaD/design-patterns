@@ -6,5 +6,5 @@ import java.util.Deque;
 
 public interface IterationStrategy {
 
-    <T extends Comparable<T>> BinaryTree.Node<T> getCurrentValue(Deque<BinaryTree.Node<T>> nodes);
+    <T extends Comparable<T>> BinaryTree.Node<T> next(Deque<BinaryTree.Node<T>> nodes);
 }

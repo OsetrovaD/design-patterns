@@ -1,8 +1,8 @@
 package com.osetrova.designpatterns.model.visitor;
 
-import com.osetrova.designpatterns.model.tree.AcceptVisitor;
+import com.osetrova.designpatterns.model.tree.AcceptVisitorNode;
 
 public interface BinaryTreeVisitor<T extends Comparable<T>> {
 
-    void collectStatistic(AcceptVisitor<T> node);
+    void collectStatistic(AcceptVisitorNode<T> node);
 }

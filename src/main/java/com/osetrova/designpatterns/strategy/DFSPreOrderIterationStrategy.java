@@ -26,7 +26,7 @@ public final class DFSPreOrderIterationStrategy implements IterationStrategy {
     }
 
     @Override
-    public <T extends Comparable<T>> BinaryTree.Node<T> getCurrentValue(Deque<BinaryTree.Node<T>> nodes) {
+    public <T extends Comparable<T>> BinaryTree.Node<T> next(Deque<BinaryTree.Node<T>> nodes) {
         BinaryTree.Node<T> currentNode = nodes.pop();
 
         if (nonNull(currentNode.getRightChild())) {

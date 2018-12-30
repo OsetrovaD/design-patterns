@@ -13,29 +13,16 @@ public class BinaryTreeIterator<T extends Comparable<T>> implements Iterator<Bin
 
     @Setter
     private IterationStrategy strategy;
-    private BinaryTree<T> currentTree;
     private Deque<BinaryTree.Node<T>> nodes = new ArrayDeque<>();
-    private boolean isIterationJustStarted = true;
 
     public BinaryTreeIterator(BinaryTree<T> currentTree, IterationStrategy strategy) {
-        this.currentTree = currentTree;
+        this.nodes.add(currentTree.getRoot());
         this.strategy = strategy;
     }
 
     @Override
     public boolean hasNext() {
-        boolean result;
-        if (isIterationJustStarted) {
-            result = currentTree.getRoot() != null;
-        } else {
-            result = !nodes.isEmpty();
-
-            if (!result) {
-                isIterationJustStarted = true;
-            }
-        }
-
-        return result;
+        return !nodes.isEmpty();
     }
 
     @Override
@@ -44,11 +31,6 @@ public class BinaryTreeIterator<T extends Comparable<T>> implements Iterator<Bin
             throw new NoSuchElementException();
         }
 
-        if (isIterationJustStarted) {
-            nodes.add(currentTree.getRoot());
-            isIterationJustStarted = false;
-        }
-
-        return strategy.getCurrentValue(nodes);
+        return strategy.next(nodes);
     }
 }
